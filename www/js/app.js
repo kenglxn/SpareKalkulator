@@ -5,7 +5,10 @@
 // the 2nd parameter is an array of 'requires'
 // 'starter.services' is found in services.js
 // 'starter.controllers' is found in controllers.js
-angular.module('app', ['ionic', 'chart.js', 'app.controllers', 'app.routes', 'app.services', 'app.directives'])
+angular.module('app', ['ionic', 'LocalStorageModule', 'chart.js', 'app.controllers', 'app.routes', 'app.services', 'app.directives'])
+.config(function(localStorageServiceProvider){
+  localStorageServiceProvider.setPrefix('spareKalkulator')
+})
 
 .run(function($ionicPlatform) {
   $ionicPlatform.ready(function() {
