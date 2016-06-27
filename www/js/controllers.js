@@ -1,6 +1,6 @@
 angular.module('app.controllers', [])
 
-.controller('spareKalkulatorCtrl', function($scope, localStorageService) {
+.controller('spareKalkulatorCtrl', function($scope, localStorageService, _) {
   var defaults = localStorageService.get('calcModel') || {
     startAmount: 5000,
     monthlyAmount: 1000,
@@ -10,11 +10,19 @@ angular.module('app.controllers', [])
   localStorageService.bind($scope, 'calcModel', defaults)
 
   var graphFn = function (model) {
-    console.log('graphFn', model)
-    $scope.labels = ["January", "February", "March", "April", "May", "June", "July"];
-    $scope.data = [
-        [65, 59, 80, 81, 56, 55, 40]
-    ];
+    var years = _.range(parseInt(model.years, 10))
+    var startAmount = parseInt(model.startAmount, 10)
+    var monthlyAmount = parseInt(model.monthlyAmount, 10)
+    var interest = parseInt(model.interest, 10) / 100
+
+    var totalSavings = startAmount
+    var savingsPerYear = _.map(years, function() {
+      var yearlyAmount = (monthlyAmount * 12)
+      totalSavings = (totalSavings + yearlyAmount) * (1 + interest)
+      return Math.round(totalSavings)
+    })
+    $scope.labels = _.map(years, function () { return ''})
+    $scope.data = [savingsPerYear];
   }
   $scope.$watchCollection('calcModel', graphFn)
 })
