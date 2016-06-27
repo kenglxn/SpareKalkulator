@@ -7,8 +7,8 @@ angular.module('app.routes', [])
   // Set up the various states which the app can be in.
   // Each state's controller can be found in controllers.js
   $stateProvider
-    
-  
+
+
 
       .state('tabsController.spareKalkulator', {
     url: '/page2',
@@ -20,12 +20,12 @@ angular.module('app.routes', [])
     }
   })
 
-  .state('tabsController.instillinger', {
+  .state('tabsController.nedtelling', {
     url: '/page3',
     views: {
       'tab3': {
-        templateUrl: 'templates/instillinger.html',
-        controller: 'instillingerCtrl'
+        templateUrl: 'templates/nedtelling.html',
+        controller: 'nedtellingCtrl'
       }
     }
   })
@@ -38,6 +38,6 @@ angular.module('app.routes', [])
 
 $urlRouterProvider.otherwise('/page1/page2')
 
-  
+
 
 });

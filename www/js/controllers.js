@@ -27,6 +27,6 @@ angular.module('app.controllers', [])
   $scope.$watchCollection('calcModel', graphFn)
 })
 
-.controller('instillingerCtrl', function($scope) {
+.controller('nedtellingCtrl', function($scope) {
   console.log($scope)
 })
