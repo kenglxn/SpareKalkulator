@@ -16,6 +16,12 @@ angular.module('app', [
   'app.directives'
 ]).config(function(localStorageServiceProvider){
   localStorageServiceProvider.setPrefix('spareKalkulator')
+}).config(function(ChartJsProvider){
+  ChartJsProvider.setOptions({
+    tooltipFillColor: '#EEE',
+    tooltipFontColor: '#000',
+    tooltipFontSize: 25
+  })
 })
 
 .run(function($ionicPlatform) {
