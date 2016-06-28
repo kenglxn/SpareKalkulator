@@ -20,7 +20,7 @@ angular.module('app.controllers', [])
       totalSavings = Math.floor((totalSavings + (monthlyAmount * 6)) * (1 + interest)) + (monthlyAmount*6)
       return totalSavings
     })
-    $scope.total = totalSavings
+    $scope.total = totalSavings + ',-'
     $scope.labels = _.map(years, function () { return ''})
     $scope.data = [savingsPerYear]
   }
