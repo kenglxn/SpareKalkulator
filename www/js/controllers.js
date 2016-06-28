@@ -13,16 +13,16 @@ angular.module('app.controllers', [])
     var years = _.range(parseInt(model.years, 10))
     var startAmount = parseInt(model.startAmount, 10)
     var monthlyAmount = parseInt(model.monthlyAmount, 10)
-    var interest = parseInt(model.interest, 10) / 100
+    var interest = parseFloat(model.interest, 10) / 100
 
     var totalSavings = startAmount
     var savingsPerYear = _.map(years, function() {
-      var yearlyAmount = (monthlyAmount * 12)
-      totalSavings = (totalSavings + yearlyAmount) * (1 + interest)
-      return Math.round(totalSavings)
+      totalSavings = Math.floor((totalSavings + (monthlyAmount * 6)) * (1 + interest)) + (monthlyAmount*6)
+      return totalSavings
     })
+    $scope.total = totalSavings
     $scope.labels = _.map(years, function () { return ''})
-    $scope.data = [savingsPerYear];
+    $scope.data = [savingsPerYear]
   }
   $scope.$watchCollection('calcModel', graphFn)
 })
