@@ -10,17 +10,17 @@ angular.module('app.controllers', [])
   localStorageService.bind($scope, 'calcModel', defaults)
 
   var graphFn = function (model) {
-    var years = _.range(parseInt(model.years, 10))
-    var startAmount = parseInt(model.startAmount, 10)
-    var monthlyAmount = parseInt(model.monthlyAmount, 10)
-    var interest = parseFloat(model.interest, 10) / 100
+    var years = _.range(parseInt(model.years, 10)) || 0
+    var startAmount = parseInt(model.startAmount, 10) || 0
+    var monthlyAmount = parseInt(model.monthlyAmount, 10) || 0
+    var interest = (parseFloat(model.interest, 10) || 0) / 100
 
     var totalSavings = startAmount
     var savingsPerYear = _.map(years, function() {
       totalSavings = Math.floor((totalSavings + (monthlyAmount * 6)) * (1 + interest)) + (monthlyAmount*6)
       return totalSavings
     })
-    $scope.total = totalSavings + ',-'
+    $scope.total = totalSavings.toLocaleString() + ',-'
     $scope.labels = _.map(years, function () { return ''})
     $scope.data = [savingsPerYear]
   }
