@@ -16,13 +16,26 @@ angular.module('app.controllers', [])
     var interest = (parseFloat(model.interest, 10) || 0) / 100
 
     var totalSavings = startAmount
-    var savingsPerYear = _.map(years, function() {
+    var savingsOnly = startAmount
+    var savingsWithInterest = _.map(years, function() {
       totalSavings = Math.floor((totalSavings + (monthlyAmount * 6)) * (1 + interest)) + (monthlyAmount*6)
       return totalSavings
     })
+    var savingsNoInterest = _.map(years, function() {
+      savingsOnly = Math.floor((savingsOnly + (monthlyAmount * 6)) * (1 + 0)) + (monthlyAmount*6)
+      return savingsOnly
+    })
     $scope.total = totalSavings.toLocaleString() + ',-'
-    $scope.labels = _.map(years, function () { return ''})
-    $scope.data = [savingsPerYear]
+    $scope.labels = _.map(years, function (y) { return y + 1 +'. År'})
+    $scope.series = ['Inkl. avkastning', 'Kun innskudd']
+    $scope.data = [savingsWithInterest, savingsNoInterest]
+    $scope.options = {
+      scales: {
+        yAxes: [{
+          stacked: true
+        }]
+      }
+    };
   }
   $scope.$watchCollection('calcModel', graphFn)
 })

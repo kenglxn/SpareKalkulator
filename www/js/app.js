@@ -18,9 +18,9 @@ angular.module('app', [
   localStorageServiceProvider.setPrefix('spareKalkulator')
 }).config(function(ChartJsProvider){
   ChartJsProvider.setOptions({
-    tooltipFillColor: '#EEE',
-    tooltipFontColor: '#000',
-    tooltipFontSize: 25
+    // tooltipFillColor: '#EEE',
+    // tooltipFontColor: '#000',
+    // tooltipFontSize: 25
   })
 })
 
