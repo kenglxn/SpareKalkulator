@@ -17,10 +17,20 @@ angular.module('app', [
 ]).config(function(localStorageServiceProvider){
   localStorageServiceProvider.setPrefix('spareKalkulator')
 }).config(function(ChartJsProvider){
+  var templateFn = function(value) {
+    if (value.datasetLabel)  {
+        return value.datasetLabel + ": " + value.value.toLocaleString() + ',-';
+    } else {
+      return value.value.toLocaleString()  + ',-';
+    }
+  };
+
   ChartJsProvider.setOptions({
     // tooltipFillColor: '#EEE',
     // tooltipFontColor: '#000',
     // tooltipFontSize: 25
+    tooltipTemplate: templateFn,
+    multiTooltipTemplate: templateFn
   })
 })
 
